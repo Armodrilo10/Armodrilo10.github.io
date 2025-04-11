@@ -1,31 +1,8 @@
-const textBox = document.getElementById('about-text-box');
-const text = "My name is Kaustubh. I love Baki anime. I am currently open to any opporutnities that will make me one step closer to Baki Hanma.";
-let index = 0;
-
-function typeWriter() {
-    if (index < text.length) {
-        textBox.innerHTML += text.charAt(index);
-        index++;
-        setTimeout(typeWriter, 20);
-    }
-}
-
-document.getElementById('about-link').addEventListener('click', function(event) {
-    event.preventDefault();
-    if (textBox.style.display === 'none' || textBox.style.display === '') {
-        textBox.style.display = 'block';
-        textBox.innerHTML = "";
-        index = 0;
-        typeWriter();
-    } else {
-        textBox.style.display = 'none';
-    }
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     const chatInput = document.getElementById('chat-input');
     const sendButton = document.getElementById('send-button');
-    
+
+
     chatInput.addEventListener('focus', () => {
         chatInput.placeholder = '';
     });
@@ -38,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const chatMessages = document.querySelector('.chat-messages');
     const chatBoxContainer = document.querySelector('.chat-box-container');
-    let isExpanded = false;
+    let isExpanded = false; 
 
     sendButton.addEventListener('click', () => {
         const messageText = chatInput.value;
@@ -49,18 +26,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 isExpanded = true;
             }
 
+            // User message
             const userMessage = document.createElement('div');
             userMessage.classList.add('user-message');
             userMessage.textContent = messageText;
             chatMessages.appendChild(userMessage);
 
+            // Bot message
             const botMessage = document.createElement('div');
             botMessage.classList.add('bot-message');
             botMessage.textContent = 'Personalised LLM in development...';
             chatMessages.appendChild(botMessage);
 
             chatInput.value = '';
+
             chatMessages.scrollTop = chatMessages.scrollHeight;
+
             sendButton.classList.add('translucent');
             setTimeout(() => {
                 sendButton.classList.remove('translucent');
@@ -100,4 +81,49 @@ document.addEventListener('DOMContentLoaded', () => {
             chatInput.blur();
         }
     });
+
+    const aboutLink = document.getElementById('about-link');
+    const aboutMeText = document.getElementById('about-me-text');
+    const aboutMeParagraph = aboutMeText.querySelector('p');
+    const aboutMeTextContent = aboutMeParagraph.textContent;
+    aboutMeParagraph.textContent = '';
+    let isAboutMeVisible = false;
+    let typingInterval;
+
+    aboutLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        aboutMeText.style.display = 'none';
+
+        if (isAboutMeVisible) {
+            aboutMeText.style.display = 'none';
+            isAboutMeVisible = false;
+            clearInterval(typingInterval);
+        } else {
+            aboutMeText.style.display = 'block';
+            isAboutMeVisible = true;
+
+            aboutMeParagraph.textContent = '';
+            let i = 0;
+            typingInterval = setInterval(() => {
+                if (i < aboutMeTextContent.length) {
+                    aboutMeParagraph.textContent += aboutMeTextContent.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typingInterval);
+                }
+            }, 20);
+        }
+    });
+});
+
+const articlesLink = document.getElementById('articles-link');
+const tooltip = document.getElementById('articles-tooltip');
+
+articlesLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    tooltip.style.display = 'block';
+
+    setTimeout(() => {
+        tooltip.style.display = 'none';
+    }, 2000);
 });
