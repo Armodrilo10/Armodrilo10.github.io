@@ -127,3 +127,40 @@ articlesLink.addEventListener('click', (e) => {
         tooltip.style.display = 'none';
     }, 2000);
 });
+
+// Add this to your script.js
+function adjustChatBoxForMobile() {
+    const isMobile = window.innerWidth <= 768;
+    const chatBoxContainer = document.querySelector('.chat-box-container');
+    
+    if (isMobile && isExpanded) {
+      chatBoxContainer.style.height = '250px'; // Slightly smaller on mobile
+    } else if (isExpanded) {
+      chatBoxContainer.style.height = '300px'; // Original height on desktop
+    }
+  }
+  
+  // Add event listener for resize
+  window.addEventListener('resize', adjustChatBoxForMobile);
+
+  // Improve touch interactions
+document.addEventListener('touchstart', function(e) {
+    // Handle tooltip for touch devices
+    if (e.target === articlesLink) {
+      e.preventDefault();
+      tooltip.style.display = 'block';
+      
+      setTimeout(() => {
+        tooltip.style.display = 'none';
+      }, 2000);
+    }
+  });
+  
+  // Improve touch focus on chat input
+  chatInput.addEventListener('touchstart', () => {
+    if (!isExpanded && chatMessages.children.length > 0) {
+      chatBoxContainer.classList.add('expanded');
+      chatMessages.classList.add('expanded');
+      isExpanded = true;
+    }
+  });

@@ -1,23 +1,27 @@
 .background-pipe {
     position: absolute;
     width: 100%;
-    height: 500px; 
+    height: auto; /* Allow height to adjust based on viewport */
+    max-height: 500px;
+    min-height: 200px;
     top: auto;
     bottom: 100px;
     left: 0;
     z-index: -2;
     pointer-events: none;
     opacity: 0.9;
+    /* Add this to preserve aspect ratio */
+    transform: scale(1);
 }
 
 .pipe {
-    stroke-width: 86px;
+    stroke-width: 86px; /* Original thickness */
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
-    animation: dash 3s linear forwards;
+    animation: dash 3s linear forwards
 }
 
 @keyframes dash {
@@ -173,58 +177,6 @@ header h1 {
     }
     100% {
         box-shadow: 1px 1px 10px cyan;
-    }
-}
-
-/* Media queries for responsiveness */
-@media (max-width: 767px) {
-    header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    header h1 {
-        font-size: 2em;
-        transform: translate(0, 0);
-    }
-
-    .photo {
-        transform: translateY(0);
-    }
-
-    .main-nav {
-        margin: 30px auto;
-    }
-
-    .main-nav ul {
-        display: block;
-    }
-
-    .main-nav li {
-        display: block;
-        margin: 10px 0;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .project-card {
-        height: auto;
-    }
-
-    #about-me-text {
-        width: 90%;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    header h1 {
-        font-size: 2em;
-    }
-
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -413,3 +365,88 @@ header h1 {
         box-shadow: 1px 1px 10px cyan;
     }
 }
+
+/* Media Queries for Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    /* Header adjustments */
+    header {
+      flex-direction: column;
+      padding: 10px 3%;
+    }
+    
+    header h1 {
+      transform: none;
+      margin-top: 10px;
+      font-size: 2em;
+    }
+    
+    .photo {
+      transform: none;
+    }
+    
+    .contact-links {
+      margin-top: 15px;
+    }
+    
+    /* Navigation adjustments */
+    .main-nav {
+      margin: 30px auto;
+    }
+    
+    .main-nav ul {
+      padding: 3px 5px;
+    }
+    
+    .main-nav li {
+      margin: 0 8px;
+    }
+    
+    /* Chat box adjustments */
+    .chat-box-container {
+      max-width: 90%;
+    }
+    
+    /* About me text adjustments */
+    #about-me-text {
+      width: 90%;
+      margin: -15px auto 30px auto;
+    }
+    
+    /* Project grid adjustments */
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .project-card {
+      height: auto;
+      min-height: 150px;
+    }
+    
+    /* Background pipe adjustments */
+    .background-pipe {
+        bottom: 50px; /* Move up slightly on mobile */
+        transform: scale(0.8); /* Scale down proportionally */
+        transform-origin: center bottom; /* Keep it anchored at the bottom */
+    }
+  }
+  
+  /* Additional adjustments for very small screens */
+  @media screen and (max-width: 480px) {
+    header h1 {
+      font-size: 1.7em;
+    }
+    
+    .contact-links a {
+      font-size: 1.3em;
+      margin-left: 12px;
+    }
+    
+    .main-nav a {
+      font-size: 0.9em;
+      padding: 6px 8px;
+    }
+
+    .background-pipe {
+        transform: scale(0.7); /* Scale down more for very small screens */
+    }
+  }
