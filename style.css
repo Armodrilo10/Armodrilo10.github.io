@@ -6,10 +6,10 @@
 .background-pipe {
     position: absolute;
     width: 100%;
-    height: 30vh; /* Slightly increased height */
+    height: 30vh;
     max-height: 400px;
     top: auto;
-    bottom: 150px; /* Moved further down (smaller value moves it down) */
+    bottom: 150px;
     left: 0;
     z-index: -2;
     pointer-events: none;
@@ -17,7 +17,7 @@
 }
 
 .pipe {
-    stroke-width: 120px; /* Increased from 86px for thicker pipe */
+    stroke-width: 120px;
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -32,10 +32,6 @@
     }
 }
 
-/*.projects {
-    position: relative;
-}*/
-
 body {
     background-color: #070708;
     color: #e0e0e0;
@@ -43,7 +39,7 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: hidden;
 }
 
 .photo {
@@ -75,7 +71,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px var(--content-padding);
-  flex-wrap: wrap; /* Allow items to wrap on small screens */
+  flex-wrap: wrap;
   max-width: var(--max-width);
   margin: 0 auto; 
 }
@@ -84,8 +80,8 @@ header h1 {
     margin: 0; 
   font-family: 'Roboto Mono', monospace; 
   font-weight: 600;
-  font-size: clamp(1.8rem, 4vw, 3rem); /* Responsive font size */
-  transform: translate(0, 30%); 
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  transform: translate(5%, 30%); 
 }
 
 .contact-links {
@@ -312,7 +308,7 @@ header h1 {
     margin-bottom: 30px;
     margin-left: auto;
     margin-right: auto;
-    max-width: 1200px; /* Adjusted for 3 columns */
+    max-width: 1200px;
     width: 95%;
     padding: 0 var(--content-padding);
     text-align: center;
@@ -324,16 +320,16 @@ header h1 {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    gap: 25px; /* Slightly increased gap for better spacing */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px; 
 }
 
 .project-card {
     background-color: #0e0e0e;
     border: 1px solid #333;
     border-radius: 20px;
-    padding: 20px; /* Restored padding for better content spacing */
-    height: 170px; /* Good height for 3 column layout */
+    padding: 20px;
+    height: 170px;
     text-decoration: none;
     color: #e0e0e0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -360,7 +356,7 @@ header h1 {
 .project-card p {
     margin: 0;
     text-align: left;
-    overflow: hidden; /* Removes scrollbar */
+    overflow: hidden;
     max-height: 90px;
     line-height: 1.4;
 }
@@ -383,76 +379,9 @@ header h1 {
     }
 }
 
-/* Small screens: stack everything */
-@media (max-width: 768px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
-  
-    header {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 10px;
-    }
-  
-    .main-nav ul {
-      flex-direction: column;
-      align-items: center;
-      padding: 10px 0;
-    }
-  
-    .chat-box-container {
-      width: 95%;
-      max-width: 95%;
-      height: auto;
-    }
-  
-    header h1 {
-      font-size: 1.8rem;
-      transform: none;
-    }
-  
-    .project-card {
-      height: auto;
-    }
-  }
-  
-  /* Medium screens: use 2 columns */
-  @media (max-width: 1200px) and (min-width: 769px) {
-    .projects-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  /* Ultra-wide screens: widen max-widths slightly */
-
-  /*@media (min-width: 1400px) {
-    .projects,
-    header,
-    .chat-box-container {
-      max-width: 1400px;
-    }
-  
-    .project-card {
-      height: 180px;
-    }
-  }
-  
-  @media (min-width: 1800px) {
-    .projects,
-    header,
-    .chat-box-container {
-      max-width: 1600px;
-    }
-  
-    .project-card {
-      height: 190px;
-    }
-  }*/
-
 html, body {
     overflow-x: hidden;
-    overflow-y: auto; /* Allow vertical scrolling only when needed */
+    overflow-y: auto;
     margin: 0;
     padding: 0;
     max-width: 100vw;
@@ -462,4 +391,280 @@ html, body {
 svg.background-pipe {
     overflow: hidden;
     pointer-events: none;
+}
+
+.particle-bg {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(circle, cyan 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.05;
+    z-index: -1;
+}
+
+/* Small screens: stack everything */
+
+
+@media (min-width: 769px) and (orientation: portrait) {
+    .particle-bg {
+      display: none;
+    }
+}
+  
+/* Hide particles on all landscape devices larger than 1024px (like tablets) */
+@media (min-width: 1025px) and (orientation: landscape) {
+    .particle-bg {
+      display: none;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .background-pipe {
+        display: none;  /* Completely removes the SVG from display */
+    }
+
+    .particle-bg {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: radial-gradient(circle, rgba(0,255,255,0.2) 2px, transparent 2px);
+        background-size: 30px 30px;
+        opacity: 0.25;
+        z-index: -10;
+        animation: floatParticles 20s linear infinite;
+    }
+      
+    @keyframes floatParticles {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 100px 100px;
+        }
+    }
+
+    .projects {
+        padding-left: 2%;  /* Reduce left padding */
+        text-align: left;  /* Align text to left */
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      justify-content: flex-start;
+    }
+  
+    header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 15px 10px;
+    }
+
+    /* Center the photo */
+    .photo {
+      margin: 0 auto;
+      transform: none;
+    }
+
+    /* Center the name */
+    header h1 {
+      width: 100%;
+      transform: none;
+      margin: 10px 0;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* Center the contact links */
+    .contact-links {
+      width: 100%;
+      justify-content: center;
+      margin-top: 0;
+    }
+
+    .contact-links a {
+        padding: 8px;
+      margin: 0 10px;
+    }
+  
+    /* Keep nav bar horizontal but make it scrollable */
+    .main-nav {
+      width: 100%;
+      overflow-x: visible;
+      -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+      margin: 5px auto;
+      padding: 0 2%;
+      padding-left: 0;
+    }
+
+    .main-nav ul {
+        padding: 3px 5px;  /* Reduced padding */
+        border-radius: 12px;  /* Slightly smaller border radius */
+        flex-wrap: wrap;  /* Allow wrapping instead of scrolling */
+        min-width: auto;  /* Remove the min-width that forced scrolling */
+        justify-content: center;
+        margin-left: 0;
+    }
+
+    .main-nav li {
+      white-space: nowrap;
+      margin: 2px 3px;
+    }
+
+    .main-nav a {
+        font-size: 0.9em;  /* Smaller font */
+        padding: 5px 8px;  /* Reduced padding */
+    }
+  
+    .chat-box-container {
+      width: 95%;
+      max-width: 95%;
+      margin-top: 35px;
+      margin-bottom: -20px;
+    }
+
+    #chat-input {
+        font-size: 16px;  /* Prevents iOS zoom on input focus */
+        padding: 8px 10px;  /* Larger input area */
+    }
+
+    .gpt-style-send-button {
+        width: 32px;  /* Larger button */
+        height: 32px;  /* Larger button */
+        margin-top: -7px;
+    }
+
+    /* Add focus styles for keyboard navigation */
+    a:focus, button:focus, input:focus {
+    outline: 2px solid cyan;
+    outline-offset: 2px;
+    }
+  
+    .project-card {
+      height: auto;
+      min-height: 120px;
+      margin-left: 0;
+      background-color: #0b0b0b;
+      box-shadow: 0 0 4px rgba(0, 255, 255, 0.05);
+    }
+
+    .project-card p {
+        color: #cccccc;  /* Lighter text for better readability */
+        line-height: 1.5;  /* More spacing between lines */
+        font-size: 0.95em;  /* Slightly larger text */
+    }
+
+    /* About me section adjustment */
+    #about-me-text {
+      margin: 10px auto 0 auto;
+      width: 92%;
+      transition: opacity 0.3s ease;
+    }
+}
+
+/* Adjustments for very small phones (under 360px) */
+@media (max-width: 359px) {
+
+    .background-pipe {
+        display: none;  /* Completely removes the SVG from display */
+    }
+
+    .main-nav li {
+        margin: 1px 2px;  /* Even smaller margins */
+    }
+
+
+    .main-nav a {
+        font-size: 0.85em;  /* Even smaller font */
+        padding: 4px 6px
+    }
+
+    .photo {
+      width: 80px;
+      height: 80px;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+    }
+
+    .project-card {
+      padding: 15px;
+    }
+
+    .contact-links a {
+      font-size: 1.3em;
+      margin: 0 8px;
+    }
+}
+
+/* Medium screens: use 2 columns */
+@media (max-width: 1200px) and (min-width: 769px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Landscape mode optimization for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+
+    .photo {
+      width: 70px;
+      height: 70px;
+    }
+
+    header {
+      padding: 5px var(--content-padding);
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+    }
+
+    .main-nav {
+      margin: 15px auto;
+    }
+
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .background-pipe {
+      bottom: 100px;
+    }
+}
+
+/* High DPI screen adjustments (for 2K displays) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* No visible changes to layout, just optimizations for high-res displays */
+    .project-card, .chat-box-container, .main-nav ul {
+      border-width: 0.5px; /* Thinner borders look better on high DPI */
+    }
+    
+    /* Sharper animation for high refresh rate displays */
+    @keyframes move-shadow {
+      0% { box-shadow: 0 0 8px rgba(0, 255, 255, 0.8); }
+      100% { box-shadow: 0 0 10px rgba(0, 255, 255, 1); }
+    }
+}
+
+@media (min-width: 820px) and (max-width: 1366px) {
+
+    .background-pipe {
+        display: none;  
+    }
+    
+    .projects {
+      margin-left: -20px; /* Adjust this value as needed */
+    }
 }
